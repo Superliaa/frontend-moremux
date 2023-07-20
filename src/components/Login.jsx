@@ -2,6 +2,7 @@ import React, {useContext, useState} from "react"
 import {useNavigate} from 'react-router-dom'
 import image from "../assets/logo.svg";
 import {AppContext} from '../context/AppContext'
+import {user} from '../data/user'
 
 export const Login = () => {
 
@@ -14,12 +15,22 @@ export const Login = () => {
 
     let navigate = useNavigate();
     
-    const {user}= useContext(AppContext)
-
+    const {conectado, setConectado}= useContext(AppContext);
+    
+   
+    
+ 
     const handleLogin = () =>{
-        if(user.find(u => u.username === users.username && u.password === users.password )){
-        localStorage.setItem('user',JSON.stringify(users))   
-            navigate('/inicio');
+        const userEncontrado = user.find(u => u.username === users.username && u.password === users.password);
+        
+
+        if(userEncontrado !== undefined){
+        localStorage.setItem('user',JSON.stringify(userEncontrado.username))
+        localStorage.setItem('fullname',JSON.stringify(userEncontrado.fullname))
+        localStorage.setItem('rol',JSON.stringify(userEncontrado.rol))
+        setConectado([...conectado, userEncontrado])
+        
+            navigate('/menu');
         }else{
             alert('incorrecto')
         }

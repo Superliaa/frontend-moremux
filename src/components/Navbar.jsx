@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from 'react'
 import image from "../assets/logo.svg";
 import {useNavigate , Link} from 'react-router-dom'
-import {AppContext} from '../context/AppContext'
+/*import {AppContext} from '../context/AppContext'*/
 
 
 
@@ -11,8 +11,8 @@ export const Navbar =() => {
 
     const [users, setUsers] = useState([])
 
-    const { user } = useContext(AppContext);
-    console.log(user)
+    /*const { user } = useContext(AppContext);
+    
     
     useEffect(()=>{
         let data = localStorage.getItem('user')
@@ -22,7 +22,7 @@ export const Navbar =() => {
           return 
         }
       
-      },[])
+      },[])*/
 
  
 
