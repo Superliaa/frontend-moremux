@@ -14,19 +14,16 @@ function AppRouter() {
   
   const {conectado}= useContext(AppContext);
   console.log(conectado)
-  const {rol} = conectado;
-  console.log(rol)
+  
  
-  ano
-  pais
-  signo
+  
         
 
   return (
     <>
       
       <BrowserRouter>
-      <ProtectedComponent user={ rol !== 0 }>
+      <ProtectedComponent user={ conectado.rol !== 0 }>
               <Navbar/>
       </ProtectedComponent>
         <Routes>
