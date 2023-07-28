@@ -1,12 +1,12 @@
-import {Navigate} from 'react-router-dom'
+import { Navigate, Outlet } from "react-router-dom";
 
-export const ProtectedRoute = ({children, user}) => {
-    
-  /*if(!user){
-    return <Navigate to='/' />
+// eslint-disable-next-line react/prop-types
+const ProtectedRoute = ({ isAllowed, redirectToFailed = "/", children }) => {
+  if (!isAllowed) {
+    return <Navigate to={redirectToFailed} replace />;
+  }
 
-  }*/
-  return (
-    children
-  )
-}
+  return children ? children : <Outlet />;
+};
+
+export default ProtectedRoute;

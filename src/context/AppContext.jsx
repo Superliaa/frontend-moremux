@@ -1,15 +1,25 @@
-import { useState } from 'react';
 import {createContext} from 'react'
 
 
 export const AppContext = createContext();
 
-export const ContextProvider = ({children})=>{
-    const [conectado, setConectado] =useState([])
-    return (
-        <AppContext.Provider value={{conectado, setConectado}}>
-            {children}
+export function ContextProvider(props){
+    console.log("Entró al Context Provider")
 
-        </AppContext.Provider>
+    const usuarioConectado = {
+        username: '',
+        fullname: '',
+        rol: 0,
+    };
+
+    const prueba = {
+        test: 1,
+        test2: 2
+    };
+
+    return (
+        <AppContext.Provider value={{usuarioConectado, prueba}}>
+            {props.children}
+        </ AppContext.Provider>
     );
-}; 
+}

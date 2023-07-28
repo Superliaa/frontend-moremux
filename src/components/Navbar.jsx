@@ -1,7 +1,8 @@
 import { useEffect, useState, useContext } from 'react'
 import image from "../assets/logo.svg";
 import {useNavigate , Link} from 'react-router-dom'
-/*import {AppContext} from '../context/AppContext'*/
+import {AppContext} from '../context/AppContext'
+
 
 
 
@@ -11,35 +12,26 @@ export const Navbar =() => {
 
     const [users, setUsers] = useState([])
 
-    /*const { user } = useContext(AppContext);
-    
-    
-    useEffect(()=>{
-        let data = localStorage.getItem('user')
-        if(data){
-          setUsers(JSON.parse(data))
-          user.find(u=>(u.fullname == users.username))
-          return 
-        }
-      
-      },[])*/
+    const {usuarioConectado} = useContext(AppContext)
 
- 
-
-  
 
     // Replace javascript:void(0) paths with your paths
-    const navigation = [
-        { title: "Crear OT", path: '/menu' },
-        { title: "Crear Equipo", path: '/menu' },
-        { title: "Crear Ubicacion", path: '/menu' },
-       
-    ]
-
-    const navigate = useNavigate()
+    
 
     const handleClickSalir=()=>{
-        navigate('/');
+        console.log(usuarioConectado)
+        
+
+        if(usuarioConectado !== null){
+            usuarioConectado.username = '';
+            usuarioConectado.fullname = '';
+            usuarioConectado.rol = 0; 
+            localStorage.clear();
+            location.reload();
+            
+         }
+         
+         
     };
 
     useEffect(() => {
@@ -82,19 +74,37 @@ export const Navbar =() => {
                 <div className={`flex-1 items-center mt-8 md:mt-0 md:flex ${state ? 'block' : 'hidden'} `}>
                     <ul className="justify-center items-center space-y-6 md:flex md:space-x-6 md:space-y-0">
                         {
-                            navigation.map((item, idx) => {
-                                return (
-                                    <li key={idx} className="text-gray-700 hover:text-gray-900">
-                                        <Link to={item.path} className="block">
-                                            {item.title}
-                                        </Link>
-                                    </li>
-                                )
-                            })
+                           usuarioConectado.rol !== undefined &&(
+                            <Link to='/notificaciones'  className="block text-gray-700 hover:text-gray-900">Notificaciones</Link>
+                           ) 
+                        }
+                         {
+                           usuarioConectado.rol == 1 &&(
+                            <>
+                            <Link to='/usuarios'  className="block text-gray-700 hover:text-gray-900">Gestionar Usuarios</Link>
+                            <Link to='/backup'  className="block text-gray-700 hover:text-gray-900">Backup Base de Datos</Link>
+                            <Link to='/trazas'  className="block text-gray-700 hover:text-gray-900">Trazas</Link>
+                            </>
+                           ) 
+                        }
+                        {
+                           usuarioConectado.rol == 2 &&(
+                            <>
+                            <Link to='/centros'  className="block text-gray-700 hover:text-gray-900">Gestionar Centros</Link>
+                            <Link to='/equipos'  className="block text-gray-700 hover:text-gray-900">Tipos de Equipos</Link>
+                            <Link to='/componentes'  className="block text-gray-700 hover:text-gray-900">Componentes</Link>
+                            <Link to='/ordenes'  className="block text-gray-700 hover:text-gray-900">Ordenes de Trabajo</Link>
+                            </>
+                           ) 
+                        }
+                         {
+                           usuarioConectado.rol == 4 &&(
+                            <Link to='/cerrarordenes'  className="block text-gray-700 hover:text-gray-900">Cerrar Ordenes</Link>
+                           ) 
                         }
                     </ul>
                     <div className="flex-1 gap-x-6 items-center justify-end mt-6 space-y-6 md:flex md:space-y-0 md:mt-0">
-                    <span></span>
+                    <span className="">{usuarioConectado.fullname}</span>
                         <button onClick={handleClickSalir} className="flex items-center justify-center gap-x-1 py-2 px-4 text-white font-medium bg-gray-800 hover:bg-gray-700 active:bg-gray-900 rounded-full md:inline-flex">
                             Salir
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">

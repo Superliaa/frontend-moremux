@@ -1,12 +1,11 @@
-export const ProtectedComponent = ({user, children}) => {
+// eslint-disable-next-line react/prop-types
+const ProtectedComponent = ({isAllowedIf, children,}) => {
+    if (isAllowedIf) {
+        return children ? children : <></>;
+    }else{
+        return <></>;
+    }
 
-   if(user)
-   {
-    return children? children: <></>;
-   }else{
-    return <></>;
-   }
-    
-   
 };
-  
+
+export default ProtectedComponent;

@@ -1,44 +1,50 @@
-import React, {useContext, useState} from "react"
+import {useContext, useState} from "react"
 import {useNavigate} from 'react-router-dom'
 import image from "../assets/logo.svg";
 import {AppContext} from '../context/AppContext'
-import {user} from '../data/user'
+import {userList} from '../data/user'
 
 export const Login = () => {
 
-    const [users, setUsers] = useState([])
+    const [usuario, setUsuario] = useState([])
 
     const handleChange = (e) =>{
-        setUsers({... users,[e.target.name]: e.target.value}) 
-    
+        setUsuario({... usuario,[e.target.name]: e.target.value})
+
     }
 
     let navigate = useNavigate();
-    
-    const {conectado, setConectado}= useContext(AppContext);
-    
-   
-    
- 
-    const handleLogin = () =>{
-        const userEncontrado = user.find(u => u.username === users.username && u.password === users.password);
-        
+
+    const {usuarioConectado} = useContext(AppContext);
+
+
+
+
+    const handleLogin = e =>{
+        e.preventDefault();
+        const userEncontrado = userList.find(u => u.username === usuario.username && u.password === usuario.password);
+
+        console.log("USUARIO QUE ESTAMOS BUSCANDO:" + userEncontrado)
+
 
         if(userEncontrado !== undefined){
-        localStorage.setItem('user',JSON.stringify(userEncontrado.username))
-        localStorage.setItem('fullname',JSON.stringify(userEncontrado.fullname))
-        localStorage.setItem('rol',JSON.stringify(userEncontrado.rol))
-        setConectado([...conectado, userEncontrado])
-        
-            navigate('/menu');
+            localStorage.setItem('username', JSON.stringify(userEncontrado.username))
+            localStorage.setItem('fullname',JSON.stringify(userEncontrado.fullname))
+            localStorage.setItem('rol',JSON.stringify(userEncontrado.rol))
+            usuarioConectado.username = userEncontrado.username;
+            usuarioConectado.fullname = userEncontrado.fullname;
+            usuarioConectado.rol = userEncontrado.rol;
+
+            console.log(usuarioConectado.username);
+            console.log(usuarioConectado.fullname);
+            console.log(usuarioConectado.rol);
+            // navigate('/menu');
+            location.reload();
         }else{
             alert('incorrecto')
         }
     }
 
-    
-    
-   
 
     return (
         <main className="w-full h-screen flex flex-col items-center justify-center px-4">
@@ -51,12 +57,12 @@ export const Login = () => {
                     </div>
                 </div>
                 <form
-                    onSubmit={(e) => e.preventDefault()}
                     className="mt-8 space-y-5"
+                    onSubmit={handleLogin}
                 >
                     <div>
                         <label className="font-medium ">
-                            User
+                            Nombre de Usuario
                         </label>
                         <input
                             type="text"
@@ -68,7 +74,7 @@ export const Login = () => {
                     </div>
                     <div>
                         <label className="font-medium">
-                            Password
+                            Contraseña
                         </label>
                         <input
                             type="password"
@@ -82,6 +88,7 @@ export const Login = () => {
                         className="w-full px-4 py-2 text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150"
                         onClick={handleLogin}
                     >
+
                         Entrar
                     </button>
                     <div className="text-center">
@@ -89,7 +96,7 @@ export const Login = () => {
                     </div>
                 </form>
             </div>
-            
+
         </main>
     )
 }
