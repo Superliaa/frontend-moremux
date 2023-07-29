@@ -70,29 +70,51 @@ function AppRouter() {
                         }
                     >
                         <Route path='/menu' element={<Menu/>}/>
+                        <Route path='/notificaciones' element={<Notificaciones/>}/>
                     </Route>
 
                     {/* ------------------------ Administrador ------------------------ */}
-
+                    <Route element={
+                        <ProtectedRoute
+                        isAllowed={usuarioConectado.rol === 1}
+                        redirectToFailed={'/'}
+                        />
+                    }>
                     <Route path='/usuarios' element={<GestionarUsuarios/>}/>
                     <Route path='/backup' element={<BaseDatos/>}/>
                     <Route path='/trazas' element={<Trazas/>}/>
+                    </Route>
+                    
 
                     {/* ------------------------ Jefe de Taller y Comercial ------------------------ */}
+                    <Route element={
+                        <ProtectedRoute
+                        isAllowed={usuarioConectado.rol === 2 || usuarioConectado.rol === 3}
+                        redirectToFailed={'/'}
+                        />
+                    }>
 
                     <Route path='/centros' element={<GestinarCentros/>}/>
                     <Route path='/equipos' element={<TiposEquipos/>}/>
                     <Route path='/componentes' element={<Componentes/>}/>
                     <Route path='/ordenes' element={<OrdenesTrabajo/>}/>
+                    </Route>
 
                     {/* ------------------------ Tecnicos ------------------------ */}
+                    <Route element={
+                        <ProtectedRoute
+                        isAllowed={usuarioConectado.rol === 4}
+                        redirectToFailed={'/'}
+                        />
+                    }>
 
                     <Route path='/cerrarordenes' element={<CerrarOrdenes/>}/>
+                    </Route>
 
 
                     {/* ------------------------ SIN PROTEGER ------------------------ */}
                     <Route path='*' element={<NotFound/>}/>
-                    <Route path='/notificaciones' element={<Notificaciones/>}/>
+                    
 
 
                 </Routes>

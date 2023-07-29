@@ -45,7 +45,7 @@ export const Navbar =() => {
         <nav className={`bg-white pb-5 md:text-sm ${state ? "shadow-lg rounded-xl border mx-2 mt-2 md:shadow-none md:border-none md:mx-2 md:mt-0" : ""}`}>
             <div className="gap-x-14 items-center max-w-screen-xl mx-auto px-4 md:flex md:px-8">
                 <div className="flex items-center justify-between py-5 md:block">
-                    <Link to="/inicio">
+                    <Link to="/">
                         <img
                             src={image}
                             width={120}
@@ -88,14 +88,15 @@ export const Navbar =() => {
                            ) 
                         }
                         {
-                           usuarioConectado.rol == 2 &&(
+                           usuarioConectado.rol === 3 || usuarioConectado.rol === 2 ?(
                             <>
                             <Link to='/centros'  className="block text-gray-700 hover:text-gray-900">Gestionar Centros</Link>
                             <Link to='/equipos'  className="block text-gray-700 hover:text-gray-900">Tipos de Equipos</Link>
                             <Link to='/componentes'  className="block text-gray-700 hover:text-gray-900">Componentes</Link>
                             <Link to='/ordenes'  className="block text-gray-700 hover:text-gray-900">Ordenes de Trabajo</Link>
                             </>
-                           ) 
+                           ) :
+                           null
                         }
                          {
                            usuarioConectado.rol == 4 &&(
