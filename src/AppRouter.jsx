@@ -43,6 +43,7 @@ function AppRouter() {
             <BrowserRouter>
                 <ProtectedComponent isAllowedIf={usuarioConectado.rol !== 0}>
                     <Navbar/>
+                   
                 </ProtectedComponent>
 
                 <Routes>
