@@ -3,7 +3,6 @@ import {
     BrowserRouter,
     Routes,
     Route,
-    Navigate,
 } from 'react-router-dom'
 import {Menu} from './components/Menu'
 import {Login} from './components/Login'

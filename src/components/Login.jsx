@@ -53,7 +53,7 @@ export const Login = () => {
                     <img src={image} width={150} className="mx-auto" />
                     <div className="mt-5 space-y-2">
                         <h3 className="text-gray-800 text-2xl font-bold sm:text-3xl">Taller More/Mux</h3>
-                        <p className="">¿No tienes cuenta? <button className="font-medium text-indigo-600 hover:text-indigo-500">Regístrate</button></p>
+                        <p className="">¿No tienes cuenta? <button className="font-medium text-blue-900 hover:text-blue-800">Regístrate</button></p>
                     </div>
                 </div>
                 <form
@@ -69,7 +69,7 @@ export const Login = () => {
                             required
                             name='username'
                             onChange={handleChange}
-                            className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+                            className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-blue-900 shadow-sm rounded-lg"
                         />
                     </div>
                     <div>
@@ -81,18 +81,18 @@ export const Login = () => {
                             required
                             name='password'
                             onChange={handleChange}
-                            className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+                            className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-blue-900 shadow-sm rounded-lg"
                         />
                     </div>
                     <button
-                        className="w-full px-4 py-2 text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150"
+                        className="w-full px-4 py-2 text-white font-medium bg-blue-900 hover:bg-blue-800 active:bg-bg-blue-900 rounded-lg duration-150 text-white"
                         onClick={handleLogin}
                     >
 
                         Entrar
                     </button>
                     <div className="text-center">
-                        <button className="hover:text-indigo-600">¿Olvidaste tu contraseña?</button>
+                        <button className="hover:text-blue-900">¿Olvidaste tu contraseña?</button>
                     </div>
                 </form>
             </div>
