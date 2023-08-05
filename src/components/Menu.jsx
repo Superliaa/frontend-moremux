@@ -11,7 +11,7 @@ export const Menu = () => {
     fetch("https://newsapi.org/v2/top-headlines/?q=apple&from=2023-08-02&to=2023-08-02&sortBy=popularity&apiKey=88557f926be44ba8a1835ded6ca0c2d8")
     .then((response)=> response.json())
     .then(data => {
-      const articles = data.articles;
+      const articles = data.articles.slice(0, 3);
       setArticles(articles);
       console.log(articles)})
       
