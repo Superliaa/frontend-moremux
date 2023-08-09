@@ -85,8 +85,9 @@ export const Login = () => {
                         />
                     </div>
                     <button
-                        className="w-full px-4 py-2 text-white font-medium bg-blue-900 hover:bg-blue-800 active:bg-bg-blue-900 rounded-lg duration-150 text-white"
+                        className="w-full px-4 py-2 text-white font-medium rounded-lg duration-150 text-white"
                         onClick={handleLogin}
+                        style={{backgroundColor: '#240879', ':hover': {backgroundColor: '#4D15F4'}}}
                     >
 
                         Entrar

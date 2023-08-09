@@ -22,6 +22,7 @@ import { CerrarOrdenes } from "./components/CerrarOrdenes"
 import { Notificaciones } from "./components/Notificaciones"
 
 
+
 function AppRouter() {
 
 
@@ -42,7 +43,6 @@ function AppRouter() {
             <BrowserRouter>
                 <ProtectedComponent isAllowedIf={usuarioConectado.rol !== 0}>
                     <Navbar/>
-                   
                 </ProtectedComponent>
 
                 <Routes>
@@ -118,6 +118,8 @@ function AppRouter() {
 
 
                 </Routes>
+
+                
             </BrowserRouter>
         </>
     )
