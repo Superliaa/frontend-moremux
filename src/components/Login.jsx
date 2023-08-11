@@ -15,7 +15,7 @@ export const Login = () => {
 
     let navigate = useNavigate();
 
-    const {usuarioConectado} = useContext(AppContext);
+    const {usuarioConectado, setUsuarioConetado} = useContext(AppContext);
 
 
 
@@ -39,7 +39,7 @@ export const Login = () => {
             console.log(usuarioConectado.fullname);
             console.log(usuarioConectado.rol);
             // navigate('/menu');
-            location.reload();
+            //location.reload();
         }else{
             alert('incorrecto')
         }

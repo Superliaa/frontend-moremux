@@ -11,15 +11,15 @@ import {NotFound} from './components/NotFound'
 import ProtectedComponent from "./components/ProtectedComponent.jsx";
 import {AppContext} from './context/AppContext'
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
-import { GestionarUsuarios } from "./components/GestionarUsuarios"
-import { BaseDatos } from "./components/BaseDatos"
-import { Trazas } from "./components/Trazas"
-import { GestinarCentros } from "./components/GestinarCentros"
-import { TiposEquipos } from "./components/TiposEquipos"
-import { Componentes } from "./components/Componentes"
-import { OrdenesTrabajo } from "./components/OrdenesTrabajo"
-import { CerrarOrdenes } from "./components/CerrarOrdenes"
-import { Notificaciones } from "./components/Notificaciones"
+import { GestionarUsuarios } from "./pages/GestionarUsuarios"
+import { BaseDatos } from "./pages/BaseDatos"
+import { Trazas } from "./pages/Trazas"
+import { GestinarCentros } from "./pages/GestinarCentros"
+import { TiposEquipos } from "./pages/TiposEquipos"
+import { Componentes } from "./pages/Componentes"
+import { OrdenesTrabajo } from "./pages/OrdenesTrabajo"
+import { CerrarOrdenes } from "./pages/CerrarOrdenes"
+import { Notificaciones } from "./pages/Notificaciones"
 
 
 

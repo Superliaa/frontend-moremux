@@ -49,7 +49,7 @@ export const Menu = () => {
      
       
     </div>
-   <div className="fixed bottom-5 justify-center">
+   <div className="fixed bottom-5 ">
       <Pagination totalArticles={totalArticles} productsPerPage={productsPerPage} 
       currentPage={currentPage} setCurrentPage={setCurrentPage}/>
     </div>

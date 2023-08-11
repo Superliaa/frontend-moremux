@@ -1,5 +1,4 @@
 
-
 export const Pagination = ({totalArticles , productsPerPage, currentPage, setCurrentPage}) => {
 
     const pages = []
@@ -12,11 +11,11 @@ export const Pagination = ({totalArticles , productsPerPage, currentPage, setCur
     }
 
     const handleAnterior = () =>{
-        setCurrentPage(currentPage - 1)
+        setCurrentPage(currentPage - 1);
     }
 
     const handleSiguiente = () =>{
-        setCurrentPage(currentPage + 1)
+        setCurrentPage(currentPage + 1);
     }
 
     const specificPage = (n) =>{
@@ -24,10 +23,10 @@ export const Pagination = ({totalArticles , productsPerPage, currentPage, setCur
     }
 
     return (
-        <div className="max-w-screen-xl mx-auto  mt-12 px-4 text-gray-600 md:px-8  ">
+        <div className="max-w-screen-xl mx-auto mt-12 px-4 text-gray-600 md:px-8  ">
             <div className="hidden items-center justify-center sm:flex ">
                 <div className="flex items-center gap-12" aria-label="Pagination">
-                    <button  className={`px-4 py-2 border rounded-lg duration-150 hover:text-blue-900  ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`} onClick={handleAnterior}>
+                    <button  className={`px-4 py-2 border rounded-lg duration-150 hover:text-blue-900  ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`} onClick={handleAnterior} disabled={currentPage === 1 ? true : false} >
                         Anterior
                     </button>
                     <ul className="flex items-center gap-1">
@@ -39,7 +38,7 @@ export const Pagination = ({totalArticles , productsPerPage, currentPage, setCur
                             ))
                         }
                     </ul>
-                    <button  className={`px-4 py-2 border rounded-lg duration-150 hover:text-blue-900 ${currentPage >= pages.length ? 'opacity-50 cursor-not-allowed' : ''}`} onClick={handleSiguiente}>
+                    <button  className={`px-4 py-2 border rounded-lg duration-150 hover:text-blue-900 ${currentPage >= pages.length ? 'opacity-50 cursor-not-allowed' : ''}`} onClick={handleSiguiente} disabled={currentPage >= pages.length ? true : false}>
                         Siguiente
                     </button>
                 </div>
