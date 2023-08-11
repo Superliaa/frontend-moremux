@@ -1,10 +1,12 @@
 import { useEffect,useState } from "react";
+import { DotLoader } from "react-spinners";
 import { Pagination } from "./Pagination";
 
 
 export const Menu = () => {
 
   const [articles, setArticles] = useState([]);
+  const [loading , setLoading] = useState(false)
 
   const productsPerPage = 3
   const [currentPage, setCurrentPage] = useState(1)
@@ -18,21 +20,30 @@ export const Menu = () => {
 
   useEffect(() => {
 
+    setLoading(true)
+
     fetch("https://newsapi.org/v2/top-headlines/?q=apple&from=2023-08-02&to=2023-08-02&sortBy=popularity&apiKey=88557f926be44ba8a1835ded6ca0c2d8")
     .then((response)=> response.json())
     .then(data => {
       const articles = data.articles;
       setArticles(articles);
+      setLoading(false);
       console.log(articles)})
       
       
 }, []);
 
+  
 
     return (
       <>
+      <div className="items-center justify-center">
+      { loading && <DotLoader color="#240879"/>}
+      </div>
+      
     <div className="grid grid-cols-3 gap-4 flex p-4 m-3" >
       {
+        
        articles.map((article , index) => (
         <div className="bg-gray-100 shadow-md rounded-lg p-4" key={index}> 
         <h2 className="text-xl font-bold">{article.title}</h2>
