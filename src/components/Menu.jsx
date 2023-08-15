@@ -37,11 +37,11 @@ export const Menu = () => {
 
     return (
       <>
-      <div className="items-center justify-center">
-      { loading && <DotLoader color="#240879"/>}
-      </div>
+     
+      { loading &&  <div className="flex justify-center items-center h-screen"> <DotLoader color="#240879" />  </div>}
+     
       
-    <div className="grid grid-cols-3 gap-4 flex p-4 m-3" >
+    <div className="grid grid-cols-3 gap-4 flex p-4 m-3 " >
       {
         
        articles.map((article , index) => (
@@ -60,7 +60,7 @@ export const Menu = () => {
      
       
     </div>
-   <div className="fixed bottom-5 ">
+   <div className=" flex justify-center items-center bottom-10">
       <Pagination totalArticles={totalArticles} productsPerPage={productsPerPage} 
       currentPage={currentPage} setCurrentPage={setCurrentPage}/>
     </div>

@@ -23,7 +23,7 @@ export const Pagination = ({totalArticles , productsPerPage, currentPage, setCur
     }
 
     return (
-        <div className="max-w-screen-xl mx-auto mt-12 px-4 text-gray-600 md:px-8  ">
+        <div className="max-w-screen-xl mx-auto mt-12 px-4 text-gray-600 md:px-8 ">
             <div className="hidden items-center justify-center sm:flex ">
                 <div className="flex items-center gap-12" aria-label="Pagination">
                     <button  className={`px-4 py-2 border rounded-lg duration-150 hover:text-blue-900  ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`} onClick={handleAnterior} disabled={currentPage === 1 ? true : false} >
