@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {createContext} from 'react'
 
 
@@ -17,6 +17,22 @@ export function ContextProvider(props){
         test: 1,
         test2: 2
     };
+
+    useEffect(() => {
+        if (localStorage.getItem('username') !== null) {
+            setUsuarioConectado(prevState => ({
+              ...prevState,
+              username: JSON.parse(localStorage.getItem('username')),
+              fullname: JSON.parse(localStorage.getItem('fullname')),
+              rol: JSON.parse(localStorage.getItem('rol'))
+            }));
+            
+            console.log("RESTAURANDO USUARIO");
+          }
+    }, [])
+
+  
+      
 
     return (
         <AppContext.Provider value={{usuarioConectado, prueba, setUsuarioConectado}}>

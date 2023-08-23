@@ -13,7 +13,7 @@ export const Navbar =() => {
 
     const [users, setUsers] = useState([])
 
-    const {usuarioConectado} = useContext(AppContext)
+    const {usuarioConectado,  setUsuarioConectado} = useContext(AppContext)
 
 
     // Replace javascript:void(0) paths with your paths
@@ -23,16 +23,15 @@ export const Navbar =() => {
         console.log(usuarioConectado)
         
 
-        if(usuarioConectado !== null){
-            usuarioConectado.username = '';
-            usuarioConectado.fullname = '';
-            usuarioConectado.rol = 0; 
+        if (usuarioConectado !== null) {
+            setUsuarioConectado({
+              username: '',
+              fullname: '',
+              rol: 0
+            });
+          
             localStorage.clear();
-            location.reload();
-            
-         }
-         
-         
+          }
     };
 
     useEffect(() => {

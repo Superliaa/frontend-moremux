@@ -15,7 +15,7 @@ export const Login = () => {
 
     let navigate = useNavigate();
 
-    const {usuarioConectado, setUsuarioConetado} = useContext(AppContext);
+    const {usuarioConectado, setUsuarioConectado} = useContext(AppContext);
 
 
 
@@ -31,15 +31,14 @@ export const Login = () => {
             localStorage.setItem('username', JSON.stringify(userEncontrado.username))
             localStorage.setItem('fullname',JSON.stringify(userEncontrado.fullname))
             localStorage.setItem('rol',JSON.stringify(userEncontrado.rol))
-            usuarioConectado.username = userEncontrado.username;
-            usuarioConectado.fullname = userEncontrado.fullname;
-            usuarioConectado.rol = userEncontrado.rol;
+            setUsuarioConectado(userEncontrado) ;
+            
+           
 
             console.log(usuarioConectado.username);
             console.log(usuarioConectado.fullname);
             console.log(usuarioConectado.rol);
-            // navigate('/menu');
-            //location.reload();
+           
         }else{
             alert('incorrecto')
         }
@@ -58,7 +57,6 @@ export const Login = () => {
                 </div>
                 <form
                     className="mt-8 space-y-5"
-                    onSubmit={handleLogin}
                 >
                     <div>
                         <label className="font-medium ">

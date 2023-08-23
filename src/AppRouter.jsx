@@ -4,10 +4,10 @@ import {
     Routes,
     Route,
 } from 'react-router-dom'
-import {Menu} from './components/Menu'
-import {Login} from './components/Login'
+import {Menu} from './pages/Menu'
+import {Login} from './pages/Login'
 import {Navbar} from './components/Navbar'
-import {NotFound} from './components/NotFound'
+import {NotFound} from './pages/NotFound'
 import ProtectedComponent from "./components/ProtectedComponent.jsx";
 import {AppContext} from './context/AppContext'
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
@@ -29,12 +29,7 @@ function AppRouter() {
     const {usuarioConectado} = useContext(AppContext);
 
     console.log("RENDER APP ROUTER")
-    if (localStorage.getItem('username') !== null) {
-        usuarioConectado.username = JSON.parse(localStorage.getItem('username'));
-        usuarioConectado.fullname = JSON.parse(localStorage.getItem('fullname'));
-        usuarioConectado.rol = JSON.parse(localStorage.getItem('rol'));
-        console.log("RESTAURANDO USUARIO");
-    }
+  
 
 
     return (

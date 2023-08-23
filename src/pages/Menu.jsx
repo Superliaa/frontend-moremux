@@ -1,6 +1,6 @@
 import { useEffect,useState } from "react";
 import { DotLoader } from "react-spinners";
-import { Pagination } from "./Pagination";
+import { Pagination } from "../components/Pagination";
 
 
 export const Menu = () => {
