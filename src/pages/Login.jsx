@@ -1,5 +1,4 @@
 import {useContext, useState} from "react"
-import {useNavigate} from 'react-router-dom'
 import image from "../assets/logo.svg";
 import {AppContext} from '../context/AppContext'
 import {userList} from '../data/user'
@@ -13,13 +12,9 @@ export const Login = () => {
 
     }
 
-    let navigate = useNavigate();
-
     const {usuarioConectado, setUsuarioConectado} = useContext(AppContext);
 
-
-
-
+    
     const handleLogin = e =>{
         e.preventDefault();
         const userEncontrado = userList.find(u => u.username === usuario.username && u.password === usuario.password);

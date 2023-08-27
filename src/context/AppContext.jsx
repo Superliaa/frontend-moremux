@@ -20,12 +20,11 @@ export function ContextProvider(props){
 
     useEffect(() => {
         if (localStorage.getItem('username') !== null) {
-            setUsuarioConectado(prevState => ({
-              ...prevState,
+            setUsuarioConectado({
               username: JSON.parse(localStorage.getItem('username')),
               fullname: JSON.parse(localStorage.getItem('fullname')),
               rol: JSON.parse(localStorage.getItem('rol'))
-            }));
+            });
             
             console.log("RESTAURANDO USUARIO");
           }
