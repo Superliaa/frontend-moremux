@@ -20,9 +20,7 @@ export const Navbar =() => {
     
 
     const handleClickSalir=()=>{
-        console.log(usuarioConectado)
         
-
         if (usuarioConectado !== null) {
             setUsuarioConectado({
               username: '',
