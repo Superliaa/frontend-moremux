@@ -24,13 +24,13 @@ export const GestinarCentros = () => {
 }, []);
 
   return (
-    <>
+    <div className='p-4 m-3'>
       {centros.length > 0 ? (
         <TablaCentros centros={centros}/>
       ) : (
          loading &&  <div className="flex justify-center items-center h-screen"> <DotLoader color="#240879" />  </div>
       )}
-   </>
+   </div>
  
   )
 }

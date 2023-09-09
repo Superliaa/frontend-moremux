@@ -64,7 +64,7 @@ export const TablaCentros = ({centros}) => {
 
   const columns = useMemo(
     () => [
-      
+     
       {
         accessorKey: 'Nombre',
         header: 'Nombre del Centro',
@@ -75,7 +75,7 @@ export const TablaCentros = ({centros}) => {
         accessorKey: 'Provincia',
         header: 'Provincia',
         size: 140,
-        
+       
       },
       {
         accessorKey: 'DireccionTerritorial',
@@ -86,10 +86,10 @@ export const TablaCentros = ({centros}) => {
         accessorKey: 'Municipio',
         header: 'Municipio',
         size: 80,
-       
+        
       },
     ],
- 
+   
   );
 
   return (
@@ -107,7 +107,7 @@ export const TablaCentros = ({centros}) => {
         data={tableData}
         positionActionsColumn="last"
         muiTablePaginationProps={{
-            rowsPerPageOptions:[10, 50 ,100, 200],}}
+            rowsPerPageOptions:[10, 50, 100, 200],}}
             localization={MRT_Localization_ES}
 
         editingMode="modal" //default
@@ -129,7 +129,7 @@ export const TablaCentros = ({centros}) => {
             </Tooltip>
           </Box>
         )}
-       
+        
       />
       <CreateNewAccountModal
         columns={columns}
@@ -156,7 +156,7 @@ export const CreateNewAccountModal = ({ open, columns, onClose, onSubmit }) => {
     onClose();
   };
 
- 
+  
 };
 
 
