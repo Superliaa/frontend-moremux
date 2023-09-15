@@ -18,9 +18,9 @@ import { MRT_Localization_ES } from 'material-react-table/locales/es';
 
 
 
-export const TablaCentros = ({centros}) => {
+export const TablaComponentes = ({componentes}) => {
   const [createModalOpen, setCreateModalOpen] = useState(false);
-  const [tableData, setTableData] = useState(centros);
+  const [tableData, setTableData] = useState(componentes);
   const [validationErrors, setValidationErrors] = useState({});
 
  console.log(tableData)
@@ -66,25 +66,20 @@ export const TablaCentros = ({centros}) => {
     () => [
      
       {
-        accessorKey: 'Nombre',
-        header: 'Nombre del Centro',
+        accessorKey: 'Descripcion',
+        header: 'Descripcion',
         size: 140,
         
       },
       {
-        accessorKey: 'Provincia',
-        header: 'Provincia',
+        accessorKey: 'Marca',
+        header: 'Marca',
         size: 140,
        
       },
       {
-        accessorKey: 'DireccionTerritorial',
-        header: 'Division Territorial',
-       
-      },
-      {
-        accessorKey: 'Municipio',
-        header: 'Municipio',
+        accessorKey: 'Codigo',
+        header: 'Codigo',
         size: 80,
         
       },

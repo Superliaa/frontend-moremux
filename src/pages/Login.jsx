@@ -1,11 +1,12 @@
-import {useContext, useState} from "react"
+import {useContext, useState, useEffect} from "react"
 import image from "../assets/logo.svg";
 import {AppContext} from '../context/AppContext'
-import {userList} from '../data/user'
+
 
 export const Login = () => {
 
     const [usuario, setUsuario] = useState([])
+   
 
     const handleChange = (e) =>{
         setUsuario({... usuario,[e.target.name]: e.target.value})
@@ -14,12 +15,22 @@ export const Login = () => {
 
     const {usuarioConectado, setUsuarioConectado} = useContext(AppContext);
 
-    
+   
     const handleLogin = e =>{
         e.preventDefault();
-        const userEncontrado = userList.find(u => u.username === usuario.username && u.password === usuario.password);
 
-        console.log("USUARIO QUE ESTAMOS BUSCANDO:" + userEncontrado)
+        fetch("http://localhost:1337/api/usuarios")
+        .then((response) => response.json())
+        .then(data => {
+            const usuariosList = data.data.map((usuario) => usuario.attributes);
+
+            console.log(usuariosList);
+
+        
+        const userEncontrado = usuariosList.find(u => JSON.stringify(u.NombreUsuario)
+            === usuario.username && JSON.stringify(u.Contrasena) === usuario.password);
+
+        console.log("USUARIO QUE ESTAMOS BUSCANDO:" , userEncontrado)
 
 
         if(userEncontrado !== undefined){
@@ -27,8 +38,6 @@ export const Login = () => {
             localStorage.setItem('fullname',JSON.stringify(userEncontrado.fullname))
             localStorage.setItem('rol',JSON.stringify(userEncontrado.rol))
             setUsuarioConectado(userEncontrado) ;
-            
-           
 
             console.log(usuarioConectado.username);
             console.log(usuarioConectado.fullname);
@@ -37,7 +46,8 @@ export const Login = () => {
         }else{
             alert('incorrecto')
         }
-    }
+    });
+}
 
 
     return (

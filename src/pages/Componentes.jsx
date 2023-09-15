@@ -1,30 +1,30 @@
 import {useState, useEffect} from 'react'
 import { DotLoader } from "react-spinners";
-import {TablaCentros} from '../components/TablaCentros';
+import {TablaComponentes} from '../components/TablaComponentes';
 
 export const Componentes = () => {
-  const [centros, setCentros] = useState([]);
+  const [componentes, setComponentes] = useState([]);
   const [loading , setLoading] = useState(false)
 
   useEffect(() => {
 
     setLoading(true)
     
-    fetch("http://localhost:1337/api/centros")
+    fetch("http://localhost:1337/api/componentes")
     .then((response)=> response.json())
     .then(data => {
-      const centros = data.data;
-      setCentros(centros.map((centro) => centro.attributes))
+      const componentes = data.data;
+      setComponentes(componentes.map((componente) => componente.attributes))
 
       setLoading(false);
       
-      console.log(centros)})
+      console.log(componentes)})
 }, []);
 
   return (
     <div className='p-4 m-3'>
-      {centros.length > 0 ? (
-        <TablaCentros centros={centros}/>
+      {componentes.length > 0 ? (
+        <TablaComponentes componentes={componentes}/>
       ) : (
          loading &&  <div className="flex justify-center items-center h-screen"> <DotLoader color="#240879" />  </div>
       )}
