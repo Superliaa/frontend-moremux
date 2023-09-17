@@ -19,34 +19,41 @@ export const Login = () => {
     const handleLogin = e =>{
         e.preventDefault();
 
-        fetch("http://localhost:1337/api/usuarios")
+        fetch("http://localhost:1337/api/usuarios?populate=*")
         .then((response) => response.json())
         .then(data => {
             const usuariosList = data.data.map((usuario) => usuario.attributes);
 
             console.log(usuariosList);
 
-        
-        const userEncontrado = usuariosList.find(u => JSON.stringify(u.NombreUsuario)
-            === usuario.username && JSON.stringify(u.Contrasena) === usuario.password);
+            const userEncontrado =usuariosList.find(u=> u.NombreUsuario === usuario.NombreUsuario && u.Contrasena === usuario.Contrasena)
 
-        console.log("USUARIO QUE ESTAMOS BUSCANDO:" , userEncontrado)
+            console.log(userEncontrado)
+            console.log(usuario)
 
-
-        if(userEncontrado !== undefined){
-            localStorage.setItem('username', JSON.stringify(userEncontrado.username))
-            localStorage.setItem('fullname',JSON.stringify(userEncontrado.fullname))
-            localStorage.setItem('rol',JSON.stringify(userEncontrado.rol))
-            setUsuarioConectado(userEncontrado) ;
-
-            console.log(usuarioConectado.username);
+            if(userEncontrado !== undefined){
+                localStorage.setItem('username', JSON.stringify(userEncontrado.NombreUsuario))
+                localStorage.setItem('fullname',JSON.stringify(userEncontrado.Nombre + " " + userEncontrado.Apellido1 
+                    ))
+                localStorage.setItem('rol',JSON.stringify(userEncontrado.Rol))
+                setUsuarioConectado( {
+                    username: userEncontrado.NombreUsuario,
+                    fullname: userEncontrado.Nombre + userEncontrado.Apellido1,
+                    rol: userEncontrado.Rol,}) ;
+    
+                    
+                   
+               
+            }else{
+                alert('incorrecto')
+            } 
+            console.log(usuarioConectado);
             console.log(usuarioConectado.fullname);
             console.log(usuarioConectado.rol);
-           
-        }else{
-            alert('incorrecto')
-        }
-    });
+
+        })
+
+        
 }
 
 
@@ -70,7 +77,7 @@ export const Login = () => {
                         <input
                             type="text"
                             required
-                            name='username'
+                            name='NombreUsuario'
                             onChange={handleChange}
                             className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-blue-900 shadow-sm rounded-lg"
                         />
@@ -82,7 +89,7 @@ export const Login = () => {
                         <input
                             type="password"
                             required
-                            name='password'
+                            name='Contrasena'
                             onChange={handleChange}
                             className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-blue-900 shadow-sm rounded-lg"
                         />
