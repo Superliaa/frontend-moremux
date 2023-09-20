@@ -1,4 +1,5 @@
-import React, { useCallback, useMemo, useState, useEffect } from 'react';
+import React, { useCallback, useMemo, useState} from 'react';
+import {useNavigate } from 'react-router-dom'
 import { MaterialReactTable } from 'material-react-table';
 import {
   Box,
@@ -26,7 +27,13 @@ export const TablaComponentes = ({componentes}) => {
  console.log(tableData)
 
 
+  const navigate=useNavigate();
 
+  const handleComponente=()=>{
+     navigate("/crearcomponentes")
+  }
+
+ 
   const handleCreateNewRow = (values) => {
     tableData.push(values);
     setTableData([...tableData]);
@@ -123,6 +130,16 @@ export const TablaComponentes = ({componentes}) => {
               </IconButton>
             </Tooltip>
           </Box>
+          
+        )}
+        renderTopToolbarCustomActions={() => (
+          <Button
+            color="secondary"
+            onClick={handleComponente}
+            variant="contained"
+          >
+            Crear nuevo componente
+          </Button>
         )}
         
       />

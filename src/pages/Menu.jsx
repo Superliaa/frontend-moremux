@@ -28,7 +28,8 @@ export const Menu = () => {
       const articles = data.articles;
       setArticles(articles);
       setLoading(false);
-      console.log(articles)})
+      console.log(articles)
+    })
       
       
 }, []);

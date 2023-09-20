@@ -1,4 +1,5 @@
 import React, { useCallback, useMemo, useState, useEffect } from 'react';
+import {useNavigate } from 'react-router-dom'
 import { MaterialReactTable } from 'material-react-table';
 import {
   Box,
@@ -41,6 +42,11 @@ export const TablaCentros = ({centros}) => {
     }
   };
   
+  const navigate = useNavigate()
+
+  const handleCentros=()=>{
+    navigate("/crearcentros")
+  }
 
   const handleCancelRowEdits = () => {
     setValidationErrors({});
@@ -129,14 +135,17 @@ export const TablaCentros = ({centros}) => {
             </Tooltip>
           </Box>
         )}
-       
+        renderTopToolbarCustomActions={() => (
+          <Button
+            color="secondary"
+            onClick={handleCentros}
+            variant="contained"
+          >
+            Crear nuevo centro
+          </Button>
+        )}
       />
-      <CreateNewAccountModal
-        columns={columns}
-        open={createModalOpen}
-        onClose={() => setCreateModalOpen(false)}
-        onSubmit={handleCreateNewRow}
-      />
+    
     </>
   );
 };
