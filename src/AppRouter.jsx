@@ -95,8 +95,6 @@ function AppRouter() {
                     <Route path='/equipos' element={<TiposEquipos/>}/>
                     <Route path='/componentes' element={<Componentes/>}/>
                     <Route path='/ordenes' element={<OrdenesTrabajo/>}/>
-                    <Route path='/crearcentros' element={<CrearCentros/>}/>
-                    <Route path='/crearcomponentes' element={<CrearComponentes/>}/>
                     </Route>
 
                     {/* ------------------------ Tecnicos ------------------------ */}

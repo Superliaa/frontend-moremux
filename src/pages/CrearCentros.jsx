@@ -1,93 +1,67 @@
-import {useState} from 'react'
+import { useState } from "react"
 
-
-export const CrearCentros = () => {
-
-    const [usuario, setUsuario] = useState([])
-   
+export const CrearCentros = ({modalOpen, setModalOpen}) => {
 
     const handleChange = (e) =>{
         setUsuario({... usuario,[e.target.name]: e.target.value})
 
     }
 
-    
     return (
-       
-                <main className="w-full h-screen flex flex-col items-center justify-center ">
-                    <div className="w-full space-y-6 text-gray-600 sm:max-w-md mt-0">
-                        <div className="text-center ">
-                           
-                            <div className=" space-y-2">
-                                <h3 className="text-gray-800 text-2xl font-bold sm:text-3xl ">Crear Centro</h3>
-                                
-                            </div>
-                        </div>
-                        <div className="bg-white shadow-2xl p-2 py-6 space-y-4 sm:p-6 sm:rounded-lg">
-                        
-                           
-                            <form
-                                onSubmit={(e) => e.preventDefault()}
-                                className="space-y-5 "
+        modalOpen ? (
+            <div className="fixed inset-0 z-10 overflow-y-auto">
+                <div className="fixed inset-0 w-full h-full bg-black opacity-40" onClick={() => setModalOpen(false)}></div>
+                <div className="flex items-center min-h-screen px-4 py-8">
+                    <div className="relative w-full max-w-lg mx-auto bg-white rounded-md shadow-lg">
+                        <div className="flex items-center justify-between p-4 border-b">
+                            <h4 className="text-lg font-medium text-gray-800">
+                                Crear Centro
+                            </h4>
+                            <button className="p-2 text-gray-400 rounded-md hover:bg-gray-100"
+                                onClick={() => setModalOpen(false)}
                             >
-                                <div>
-                                    <label className="font-medium">
-                                        Nombre del Centro
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name='nombre'
-                                        required
-                                        onChange={handleChange}
-                                        className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
-                                    />
-                                </div>
-                                <div>
-                                    <label className="font-medium">
-                                        Provincia
-                                    </label>
-                                    <input
-                                        type="text"
-                                        required
-                                        name='provincia'
-                                        onChange={handleChange}
-                                        className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
-                                    />
-                                </div>
-                                <div>
-                                    <label className="font-medium">
-                                        Direccion Territorial
-                                    </label>
-                                    <input
-                                        type="text"
-                                        required
-                                        name='direccion'
-                                        onChange={handleChange}
-                                        className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
-                                    />
-                                </div>
-                                <div>
-                                    <label className="font-medium">
-                                        Municipio
-                                    </label>
-                                    <input
-                                        type="text"
-                                        required
-                                        name='municipio'
-                                        onChange={handleChange}
-                                        className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
-                                    />
-                                </div>
-                                <button
-                                    className="w-100 px-4 py-2 text-white font-medium rounded-lg duration-150  "   style={{backgroundColor: '#240879', ':hover': {backgroundColor: '#4D15F4'}}}
-                                >
-                                    Añadir
-                                </button>
-                            </form>
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 mx-auto" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                                </svg>
+                            </button>
                         </div>
-                        
+                        <div className="space-y-2 p-4 mt-3 text-[15.5px] leading-relaxed text-gray-500">
+                        <div>
+                    <label className="text-gray-700 dark:text-gray-200" >Nombre del centro</label>
+                    <input name="nombre" type="text" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" onChange={handleChange}/>
+                </div>
+    
+                <div>
+                    <label className="text-gray-700 dark:text-gray-200" >Provincia</label>
+                    <input name='provincia' type="text" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" onChange={handleChange}/>
+                </div>
+    
+                <div>
+                    <label className="text-gray-700 dark:text-gray-200" >Division territorial</label>
+                    <input name='division' type="text" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" onChange={handleChange}/>
+                </div>
+
+                <div>
+                    <label className="text-gray-700 dark:text-gray-200" >Municipio</label>
+                    <input name='municipio' type="text" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" onChange={handleChange}/>
+                </div>
+                
+                        </div>
+                        <div className="flex items-center gap-3 p-4 mt-5 border-t">
+                            <button className="px-6 py-2 text-white bg-indigo-600 rounded-md outline-none ring-offset-2 focus:ring-2"style={{backgroundColor: '#240879', ':hover': {backgroundColor: '#4D15F4'}}}
+                                onClick={() => setModalOpen(false)}
+                            >
+                                Añadir
+                            </button>
+                            <button className="px-6 py-2 text-gray-800 border rounded-md outline-none ring-offset-2 ring-indigo-600 focus:ring-2"
+                                onClick={() => setModalOpen(false)}
+                            >
+                                Cancelar
+                            </button>
+                        </div>
                     </div>
-                </main>
-            )
-        }
-  
+                </div>
+            </div>
+        ) : ''
+    )
+}

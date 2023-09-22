@@ -1,5 +1,4 @@
 import React, { useCallback, useMemo, useState, useEffect } from 'react';
-import {useNavigate } from 'react-router-dom'
 import { MaterialReactTable } from 'material-react-table';
 import {
   Box,
@@ -16,11 +15,12 @@ import {
 } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
 import { MRT_Localization_ES } from 'material-react-table/locales/es';
+import { CrearCentros } from '../pages/crearCentros';
 
 
 
 export const TablaCentros = ({centros}) => {
-  const [createModalOpen, setCreateModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const [tableData, setTableData] = useState(centros);
   const [validationErrors, setValidationErrors] = useState({});
 
@@ -42,11 +42,6 @@ export const TablaCentros = ({centros}) => {
     }
   };
   
-  const navigate = useNavigate()
-
-  const handleCentros=()=>{
-    navigate("/crearcentros")
-  }
 
   const handleCancelRowEdits = () => {
     setValidationErrors({});
@@ -138,14 +133,16 @@ export const TablaCentros = ({centros}) => {
         renderTopToolbarCustomActions={() => (
           <Button
             color="secondary"
-            onClick={handleCentros}
+            onClick={()=> setModalOpen(true)}
             variant="contained"
           >
             Crear nuevo centro
           </Button>
-        )}
+        )
+      }
+     
       />
-    
+    {modalOpen && <CrearCentros setModalOpen={setModalOpen} modalOpen={modalOpen} />}
     </>
   );
 };

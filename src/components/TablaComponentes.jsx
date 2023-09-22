@@ -16,22 +16,16 @@ import {
 } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
 import { MRT_Localization_ES } from 'material-react-table/locales/es';
+import { CrearComponentes } from '../pages/CrearComponentes';
 
 
 
 export const TablaComponentes = ({componentes}) => {
-  const [createModalOpen, setCreateModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const [tableData, setTableData] = useState(componentes);
   const [validationErrors, setValidationErrors] = useState({});
 
  console.log(tableData)
-
-
-  const navigate=useNavigate();
-
-  const handleComponente=()=>{
-     navigate("/crearcomponentes")
-  }
 
  
   const handleCreateNewRow = (values) => {
@@ -135,7 +129,7 @@ export const TablaComponentes = ({componentes}) => {
         renderTopToolbarCustomActions={() => (
           <Button
             color="secondary"
-            onClick={handleComponente}
+            onClick={()=> setModalOpen(true)}
             variant="contained"
           >
             Crear nuevo componente
@@ -143,12 +137,8 @@ export const TablaComponentes = ({componentes}) => {
         )}
         
       />
-      <CreateNewAccountModal
-        columns={columns}
-        open={createModalOpen}
-        onClose={() => setCreateModalOpen(false)}
-        onSubmit={handleCreateNewRow}
-      />
+
+      {modalOpen && <CrearComponentes setModalOpen={setModalOpen} modalOpen={modalOpen} />}
     </>
   );
 };
