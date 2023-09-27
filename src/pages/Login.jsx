@@ -1,5 +1,7 @@
 import {useContext, useState} from "react"
 import image from "../assets/logo.svg";
+import { ErrorIncorrecto } from "../components/ErrorIncorrecto";
+import { ErrorServidor } from "../components/ErrorServidor";
 import {AppContext} from '../context/AppContext'
 import { useFetch } from "../Hooks/useFetch";
 
@@ -7,7 +9,9 @@ import { useFetch } from "../Hooks/useFetch";
 
 export const Login = () => {
 
-    const [usuario, setUsuario] = useState([])
+    const [usuario, setUsuario] = useState([]);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [modalIncorrecto, setModalIncorrecto] = useState(false);
    
 
     const handleChange = (e) =>{
@@ -17,13 +21,13 @@ export const Login = () => {
 
     const {usuarioConectado, setUsuarioConectado} = useContext(AppContext);
 
-    const {data} = useFetch("http://localhost:1337/api/usuarios?populate=*")
+    const {data, error} = useFetch("http://localhost:1337/api/usuarios?populate=*")
 
     const handleLogin = e =>{
         e.preventDefault();
 
-        const usuariosArray = data.data;
-        const usuariosList = usuariosArray.map((user) => user.attributes)
+  
+        const usuariosList = data.map((user) => user.attributes)
   
 
             console.log(usuariosList);
@@ -31,7 +35,7 @@ export const Login = () => {
             const userEncontrado =usuariosList.find(u=> u.NombreUsuario === usuario.NombreUsuario && u.Contrasena === usuario.Contrasena)
 
             console.log(userEncontrado)
-            console.log(usuario)
+            
 
             if(userEncontrado !== undefined){
                 localStorage.setItem('username', JSON.stringify(userEncontrado.NombreUsuario))
@@ -43,17 +47,15 @@ export const Login = () => {
                     fullname: userEncontrado.Nombre + userEncontrado.Apellido1,
                     rol: userEncontrado.Rol,}) ;
                
-            }else if(usuariosList.length === 0){
-                alert('servidor no disponible')
-            }else{
-                alert('incorrecto')
+            }else if (!error){
+                setModalIncorrecto(true)
 
+            }else{
+                setModalOpen(true)
             }
             console.log(usuarioConectado);
             console.log(usuarioConectado.fullname);
             console.log(usuarioConectado.rol);
-
-        
 
         
 }
@@ -61,6 +63,9 @@ export const Login = () => {
 
     return (
         <main className="w-full h-screen flex flex-col items-center justify-center px-4">
+            {error && <ErrorServidor  setModalOpen={setModalOpen} modalOpen={modalOpen}/>}
+            {modalIncorrecto && <ErrorIncorrecto  setModalIncorrecto={setModalIncorrecto} modalIncorrecto={modalIncorrecto}/>}
+
             <div className="max-w-sm w-full text-gray-600">
                 <div className="text-center">
                     <img src={image} width={150} className="mx-auto" />
@@ -109,7 +114,7 @@ export const Login = () => {
                     </div>
                 </form>
             </div>
-
+         
         </main>
     )
 }

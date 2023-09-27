@@ -1,12 +1,15 @@
 import { useEffect,useState } from "react";
 import { DotLoader } from "react-spinners";
+import { ErrorCarga } from "../components/ErrorCarga";
 import { Pagination } from "../components/Pagination";
 
 
 export const Menu = () => {
 
   const [articles, setArticles] = useState([]);
-  const [loading , setLoading] = useState(false)
+  const [loading , setLoading] = useState(false);
+  const [error , setError] = useState(null);
+
 
   const productsPerPage = 3
   const [currentPage, setCurrentPage] = useState(1)
@@ -23,17 +26,19 @@ export const Menu = () => {
     setLoading(true)
 
     fetch("https://newsapi.org/v2/top-headlines/?q=apple&from=2023-08-02&to=2023-08-02&sortBy=popularity&apiKey=88557f926be44ba8a1835ded6ca0c2d8")
-    .then((response)=> response.json())
+    .then((response)=> {
+      if (!response.ok) {
+        throw new Error('Error en la solicitud: ' + response.status);
+      } 
+      return response.json();
+    })
     .then(data => {
       const articles = data.articles;
       setArticles(articles);
-      setLoading(false);
       console.log(articles)
     })
-    .catch((error) => {
-      alert("Error al obtener los datos de la API: ", error);
-      setLoading(false);
-    });
+    .catch((error) => setError(error))
+    .finally(() => setLoading(false));
       
       
 }, []);
@@ -44,7 +49,7 @@ export const Menu = () => {
       <>
      
       { loading &&  <div className="flex justify-center items-center h-screen"> <DotLoader color="#240879" />  </div> }
-     
+      { error && <div className="flex justify-center items-center h-screen"> <ErrorCarga /></div>}
       
     <div className="grid grid-cols-3 gap-4 flex p-4 m-3 " >
       {

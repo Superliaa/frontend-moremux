@@ -7,9 +7,8 @@ export const GestinarCentros = () => {
 
 
   const {data,loading} = useFetch("http://localhost:1337/api/centros")
-
-  const centrosArray = data.data;
-  const centros = centrosArray.map((centro) => centro.attributes)
+  
+  const centros = data.map((centro) => centro.attributes)
   
 
   return (
