@@ -11,7 +11,7 @@ export function useFetch (url){
         fetch(url)
           .then((response) => response.json())
           .then((data) => {
-            const dataApi = data.data;
+            const dataApi = data;
             setData(dataApi);
           })
           .finally(() => setLoading(false));

@@ -22,8 +22,8 @@ export const Login = () => {
     const handleLogin = e =>{
         e.preventDefault();
 
-  
-        const usuariosList = data.map((user) => user.attributes)
+        const usuariosArray = data.data;
+        const usuariosList = usuariosArray.map((user) => user.attributes)
   
 
             console.log(usuariosList);

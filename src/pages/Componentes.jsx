@@ -5,8 +5,9 @@ import {TablaComponentes} from '../components/TablaComponentes';
 export const Componentes = () => {
 
   const {data,loading} = useFetch("http://localhost:1337/api/componentes")
-  
-  const componentes = data.map((componente) => componente.attributes)
+
+  const componentesArray = data.data;
+  const componentes = componentesArray.map((componente) => componente.attributes)
   
 
   return (
