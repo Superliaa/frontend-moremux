@@ -1,5 +1,4 @@
 import React, { useCallback, useMemo, useState} from 'react';
-import {useNavigate } from 'react-router-dom'
 import { MaterialReactTable } from 'material-react-table';
 import {
   Box,

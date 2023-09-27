@@ -1,6 +1,8 @@
-import {useContext, useState, useEffect} from "react"
+import {useContext, useState} from "react"
 import image from "../assets/logo.svg";
 import {AppContext} from '../context/AppContext'
+import { useFetch } from "../Hooks/useFetch";
+
 
 
 export const Login = () => {
@@ -15,14 +17,14 @@ export const Login = () => {
 
     const {usuarioConectado, setUsuarioConectado} = useContext(AppContext);
 
-   
+    const {data} = useFetch("http://localhost:1337/api/usuarios?populate=*")
+
     const handleLogin = e =>{
         e.preventDefault();
 
-        fetch("http://localhost:1337/api/usuarios?populate=*")
-        .then((response) => response.json())
-        .then(data => {
-            const usuariosList = data.data.map((usuario) => usuario.attributes);
+  
+        const usuariosList = data.map((user) => user.attributes)
+  
 
             console.log(usuariosList);
 
@@ -40,18 +42,18 @@ export const Login = () => {
                     username: userEncontrado.NombreUsuario,
                     fullname: userEncontrado.Nombre + userEncontrado.Apellido1,
                     rol: userEncontrado.Rol,}) ;
-    
-                    
-                   
                
+            }else if(usuariosList.length === 0){
+                alert('servidor no disponible')
             }else{
                 alert('incorrecto')
-            } 
+
+            }
             console.log(usuarioConectado);
             console.log(usuarioConectado.fullname);
             console.log(usuarioConectado.rol);
 
-        })
+        
 
         
 }

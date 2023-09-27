@@ -1,31 +1,21 @@
-import {useState ,useEffect} from 'react'
 import { DotLoader } from "react-spinners";
 import {TablaCentros} from '../components/TablaCentros';
+import { useFetch } from '../Hooks/useFetch';
 
 
 export const GestinarCentros = () => {
 
-  const [centros, setCentros] = useState([]);
-  const [loading , setLoading] = useState(false)
 
-  useEffect(() => {
-
-    setLoading(true)
-    
-    fetch("http://localhost:1337/api/centros")
-    .then((response)=> response.json())
-    .then(data => {
-      const centros = data.data;
-      setCentros(centros.map((centro) => centro.attributes))
-
-      setLoading(false);
-      
-      console.log(centros)})
-}, []);
+  const {data,loading} = useFetch("http://localhost:1337/api/centros")
+  
+  const centros = data.map((centro) => centro.attributes)
+  
 
   return (
     <div className='p-4 m-3'>
-      {centros.length > 0 ? (
+      {
+        
+      centros.length > 0 ? (
          
         <TablaCentros centros={centros}/>
       ) : (

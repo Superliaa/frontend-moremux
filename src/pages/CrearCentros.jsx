@@ -2,8 +2,11 @@ import { useState } from "react"
 
 export const CrearCentros = ({modalOpen, setModalOpen}) => {
 
+    
+    const [centro, setCentro] = useState([])
+
     const handleChange = (e) =>{
-        setUsuario({... usuario,[e.target.name]: e.target.value})
+        setCentro({... centro,[e.target.name]: e.target.value})
 
     }
 
@@ -14,7 +17,7 @@ export const CrearCentros = ({modalOpen, setModalOpen}) => {
                 <div className="flex items-center min-h-screen px-4 py-8">
                     <div className="relative w-full max-w-lg mx-auto bg-white rounded-md shadow-lg">
                         <div className="flex items-center justify-between p-4 border-b">
-                            <h4 className="text-lg font-medium text-gray-800">
+                            <h4 className="text-lg font-medium text-gray-900">
                                 Crear Centro
                             </h4>
                             <button className="p-2 text-gray-400 rounded-md hover:bg-gray-100"
@@ -27,22 +30,22 @@ export const CrearCentros = ({modalOpen, setModalOpen}) => {
                         </div>
                         <div className="space-y-2 p-4 mt-3 text-[15.5px] leading-relaxed text-gray-500">
                         <div>
-                    <label className="text-gray-700 dark:text-gray-200" >Nombre del centro</label>
+                    <label className="text-gray-700 dark:text-gray-600" >Nombre del centro</label>
                     <input name="nombre" type="text" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" onChange={handleChange}/>
                 </div>
     
                 <div>
-                    <label className="text-gray-700 dark:text-gray-200" >Provincia</label>
+                    <label className="text-gray-700 dark:text-gray-600" >Provincia</label>
                     <input name='provincia' type="text" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" onChange={handleChange}/>
                 </div>
     
                 <div>
-                    <label className="text-gray-700 dark:text-gray-200" >Division territorial</label>
+                    <label className="text-gray-700 dark:text-gray-600" >Division territorial</label>
                     <input name='division' type="text" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" onChange={handleChange}/>
                 </div>
 
                 <div>
-                    <label className="text-gray-700 dark:text-gray-200" >Municipio</label>
+                    <label className="text-gray-700 dark:text-gray-600" >Municipio</label>
                     <input name='municipio' type="text" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" onChange={handleChange}/>
                 </div>
                 

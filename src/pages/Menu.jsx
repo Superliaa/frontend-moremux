@@ -30,16 +30,20 @@ export const Menu = () => {
       setLoading(false);
       console.log(articles)
     })
+    .catch((error) => {
+      alert("Error al obtener los datos de la API: ", error);
+      setLoading(false);
+    });
       
       
 }, []);
 
-  
+ 
 
     return (
       <>
      
-      { loading &&  <div className="flex justify-center items-center h-screen"> <DotLoader color="#240879" />  </div>}
+      { loading &&  <div className="flex justify-center items-center h-screen"> <DotLoader color="#240879" />  </div> }
      
       
     <div className="grid grid-cols-3 gap-4 flex p-4 m-3 " >

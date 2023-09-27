@@ -1,25 +1,13 @@
-import {useState, useEffect} from 'react'
+import { useFetch } from "../Hooks/useFetch";
 import { DotLoader } from "react-spinners";
 import {TablaComponentes} from '../components/TablaComponentes';
 
 export const Componentes = () => {
-  const [componentes, setComponentes] = useState([]);
-  const [loading , setLoading] = useState(false)
 
-  useEffect(() => {
-
-    setLoading(true)
-    
-    fetch("http://localhost:1337/api/componentes")
-    .then((response)=> response.json())
-    .then(data => {
-      const componentes = data.data;
-      setComponentes(componentes.map((componente) => componente.attributes))
-
-      setLoading(false);
-      
-      console.log(componentes)})
-}, []);
+  const {data,loading} = useFetch("http://localhost:1337/api/componentes")
+  
+  const componentes = data.map((componente) => componente.attributes)
+  
 
   return (
     <div className='p-4 m-3'>
