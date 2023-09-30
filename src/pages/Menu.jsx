@@ -66,8 +66,6 @@ export const Menu = () => {
         </div>
       )).slice(firtsIndex , lastIndex)
       }
-
-     
       
     </div>
    <div className=" flex justify-center items-center bottom-10">

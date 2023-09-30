@@ -10,6 +10,27 @@ export const CrearComponentes = ({modalOpen , setModalOpen}) => {
 
     }
 
+    const handleAdd =()=>{
+
+        fetch("http://localhost:1337/api/componentes", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                data: componente
+            })
+        })
+        .then (res => res.json())
+        .then (data => {
+            console.log(data);
+        })
+        .catch (error =>{
+            console.log(error)
+        })
+        setModalOpen(false)
+    }
+
     
     return (
             modalOpen ? (
@@ -32,23 +53,23 @@ export const CrearComponentes = ({modalOpen , setModalOpen}) => {
                             <div className="space-y-2 p-4 mt-3 text-[15.5px] leading-relaxed text-gray-500">
                             <div>
                     <label className="text-gray-700 dark:text-gray-600" >Descripcion</label>
-                    <input name="descripcion" type="text" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" onChange={handleChange}/>
+                    <input name="Descripcion" type="text" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" onChange={handleChange}/>
                 </div>
     
                 <div>
                     <label className="text-gray-700 dark:text-gray-600" >Marca</label>
-                    <input name='marca' type="text" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" onChange={handleChange}/>
+                    <input name='Marca' type="text" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" onChange={handleChange}/>
                 </div>
     
                 <div>
                     <label className="text-gray-700 dark:text-gray-600" >Codigo</label>
-                    <input name='codigo' type="text" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" onChange={handleChange}/>
+                    <input name='Codigo' type="text" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" onChange={handleChange}/>
                 </div>
     
                             </div>
                             <div className="flex items-center gap-3 p-4 mt-5 border-t">
                                 <button className="px-6 py-2 text-white bg-indigo-600 rounded-md outline-none ring-offset-2 focus:ring-2"style={{backgroundColor: '#240879', ':hover': {backgroundColor: '#4D15F4'}}}
-                                    onClick={() => setModalOpen(false)}
+                                    onClick={handleAdd}
                                 >
                                     Añadir
                                 </button>
