@@ -23,9 +23,37 @@ export const TablaCentros = ({centros}) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [tableData, setTableData] = useState(centros);
   const [validationErrors, setValidationErrors] = useState({});
+  const [centro, setCentro] = useState([])
+    
+    const handleChange = (e) =>{
+        setCentro({... centro,[e.target.name]: e.target.value})
 
- console.log(tableData)
+    }
 
+
+ const handleAdd =()=>{
+
+  fetch("http://localhost:1337/api/centros", {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+          data: centro
+      })
+  })
+  .then (res => res.json())
+  .then (data => {
+    setTableData( data );
+    console.log(tableData)
+  })
+  .catch (error =>{
+      console.log(error)
+  })
+  setModalOpen(false)
+}
+
+console.log(tableData)
 
 
   const handleCreateNewRow = (values) => {
@@ -142,7 +170,7 @@ export const TablaCentros = ({centros}) => {
       }
      
       />
-    {modalOpen && <CrearCentros setModalOpen={setModalOpen} modalOpen={modalOpen} />}
+    {modalOpen && <CrearCentros setModalOpen={setModalOpen} modalOpen={modalOpen} handleAdd={handleAdd} handleChange={handleChange} centro={centro} />}
     </>
   );
 };

@@ -24,6 +24,6 @@ export function useFetch (url){
           .finally(() => setLoading(false));
       }, []);
     
-      return { data, loading , error };
+      return { data, loading , error , setData};
     };
     

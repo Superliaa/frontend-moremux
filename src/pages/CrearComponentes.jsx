@@ -1,36 +1,9 @@
 import {useState} from 'react'
 
 
-export const CrearComponentes = ({modalOpen , setModalOpen}) => {
+export const CrearComponentes = ({modalOpen , setModalOpen, handleAdd, handleChange}) => {
 
-    const [componente, setComponente] = useState([])
    
-    const handleChange = (e) =>{
-        setComponente({... componente,[e.target.name]: e.target.value})
-
-    }
-
-    const handleAdd =()=>{
-
-        fetch("http://localhost:1337/api/componentes", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                data: componente
-            })
-        })
-        .then (res => res.json())
-        .then (data => {
-            console.log(data);
-        })
-        .catch (error =>{
-            console.log(error)
-        })
-        setModalOpen(false)
-    }
-
     
     return (
             modalOpen ? (

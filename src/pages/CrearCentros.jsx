@@ -1,39 +1,6 @@
-import { useState } from "react"
-
-export const CrearCentros = ({modalOpen, setModalOpen}) => {
-
-    
-    const [centro, setCentro] = useState([])
-
-    const handleChange = (e) =>{
-        setCentro({... centro,[e.target.name]: e.target.value})
-
-    }
 
 
-    console.log(centro)
-
-    const handleAdd =()=>{
-
-        fetch("http://localhost:1337/api/centros", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                data: centro
-            })
-        })
-        .then (res => res.json())
-        .then (data => {
-            console.log(data);
-        })
-        .catch (error =>{
-            console.log(error)
-        })
-        setModalOpen(false)
-    }
-
+export const CrearCentros = ({modalOpen, setModalOpen, handleAdd, centro, handleChange}) => {
     
 
     return (

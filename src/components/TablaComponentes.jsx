@@ -21,8 +21,37 @@ import { CrearComponentes } from '../pages/CrearComponentes';
 
 export const TablaComponentes = ({componentes}) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [tableData, setTableData] = useState(componentes);
+  
   const [validationErrors, setValidationErrors] = useState({});
+  const [componente, setComponente] = useState([])
+  const [tableData, setTableData] = useState(componentes); 
+  const handleChange = (e) =>{
+      setComponente({... componente,[e.target.name]: e.target.value})
+
+  }
+
+  const handleAdd =()=>{
+
+      fetch("http://localhost:1337/api/componentes", {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+              data: componente
+          })
+      })
+      .then (res => res.json())
+      .then (data => {
+          setTableData(data);
+          console.log(tableData)
+      })
+      .catch (error =>{
+          console.log(error)
+      })
+      setModalOpen(false)
+  }
+
 
  console.log(tableData)
 
@@ -137,7 +166,7 @@ export const TablaComponentes = ({componentes}) => {
         
       />
 
-      {modalOpen && <CrearComponentes setModalOpen={setModalOpen} modalOpen={modalOpen} />}
+      {modalOpen && <CrearComponentes setModalOpen={setModalOpen} modalOpen={modalOpen} handleChange={handleChange} handleAdd={handleAdd} />}
     </>
   );
 };
