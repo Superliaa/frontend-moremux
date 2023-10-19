@@ -15,51 +15,17 @@ import {
 } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
 import { MRT_Localization_ES } from 'material-react-table/locales/es';
-import { CrearCentros } from '../pages/crearCentros';
 
 
 
-export const TablaCentros = ({centros}) => {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [tableData, setTableData] = useState(centros);
+
+export const Tabla = ({columns, setTableData, tableData}) => {
+  
   const [validationErrors, setValidationErrors] = useState({});
-  const [centro, setCentro] = useState([])
-    
-    const handleChange = (e) =>{
-        setCentro({... centro,[e.target.name]: e.target.value})
+  
 
-    }
+ 
 
-
- const handleAdd =()=>{
-
-  fetch("http://localhost:1337/api/centros", {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-          data: centro
-      })
-  })
-  .then (res => res.json())
-  .then (data => {
-    setTableData( data );
-    console.log(tableData)
-  })
-  .catch (error =>{
-      console.log(error)
-  })
-  setModalOpen(false)
-}
-
-console.log(tableData)
-
-
-  const handleCreateNewRow = (values) => {
-    tableData.push(values);
-    setTableData([...tableData]);
-  };
 
   const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
     if (!Object.keys(validationErrors).length) {
@@ -91,35 +57,7 @@ console.log(tableData)
 
  
 
-  const columns = useMemo(
-    () => [
-      
-      {
-        accessorKey: 'Nombre',
-        header: 'Nombre del Centro',
-        size: 140,
-        
-      },
-      {
-        accessorKey: 'Provincia',
-        header: 'Provincia',
-        size: 140,
-        
-      },
-      {
-        accessorKey: 'DireccionTerritorial',
-        header: 'Division Territorial',
-       
-      },
-      {
-        accessorKey: 'Municipio',
-        header: 'Municipio',
-        size: 80,
-       
-      },
-    ],
- 
-  );
+  
 
   return (
     <>
@@ -158,19 +96,9 @@ console.log(tableData)
             </Tooltip>
           </Box>
         )}
-        renderTopToolbarCustomActions={() => (
-          <Button
-            color="secondary"
-            onClick={()=> setModalOpen(true)}
-            variant="contained"
-          >
-            Crear nuevo centro
-          </Button>
-        )
-      }
-     
+       
       />
-    {modalOpen && <CrearCentros setModalOpen={setModalOpen} modalOpen={modalOpen} handleAdd={handleAdd} handleChange={handleChange} centro={centro} />}
+   
     </>
   );
 };

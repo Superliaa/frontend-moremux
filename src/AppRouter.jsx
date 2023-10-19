@@ -22,6 +22,7 @@ import { CerrarOrdenes } from "./pages/CerrarOrdenes"
 import { Notificaciones } from "./pages/Notificaciones"
 import { CrearCentros } from "./pages/crearCentros"
 import { CrearComponentes } from "./pages/CrearComponentes"
+import { Pruebas } from "./pages/Pruebas"
 
 
 
@@ -95,6 +96,7 @@ function AppRouter() {
                     <Route path='/equipos' element={<TiposEquipos/>}/>
                     <Route path='/componentes' element={<Componentes/>}/>
                     <Route path='/ordenes' element={<OrdenesTrabajo/>}/>
+                    <Route path='/pruebas' element={<Pruebas/>}/>
                     </Route>
 
                     {/* ------------------------ Tecnicos ------------------------ */}

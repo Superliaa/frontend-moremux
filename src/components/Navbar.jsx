@@ -87,6 +87,7 @@ export const Navbar =() => {
                             <Link to='/equipos'  className="block text-gray-700 hover:text-gray-900">Tipos de Equipos</Link>
                             <Link to='/componentes'  className="block text-gray-700 hover:text-gray-900">Componentes</Link>
                             <Link to='/ordenes'  className="block text-gray-700 hover:text-gray-900">Ordenes de Trabajo</Link>
+                            <Link to='/pruebas'  className="block text-gray-700 hover:text-gray-900">Pruebas</Link>
                             </>
                            ) :
                            null

@@ -1,6 +1,6 @@
 
 
-export const CrearCentros = ({modalOpen, setModalOpen, handleAdd, centro, handleChange}) => {
+export const CrearCentros = ({modalOpen, setModalOpen, handleAdd, handleChange,handleCreateNewRow}) => {
     
 
     return (
@@ -44,8 +44,9 @@ export const CrearCentros = ({modalOpen, setModalOpen, handleAdd, centro, handle
                 
                         </div>
                         <div className="flex items-center gap-3 p-4 mt-5 border-t">
-                            <button className="px-6 py-2 text-white bg-indigo-600 rounded-md outline-none ring-offset-2 focus:ring-2"style={{backgroundColor: '#240879', ':hover': {backgroundColor: '#4D15F4'}}}
+                            <button className="px-6 py-2 text-white bg-indigo-600 rounded-md outline-none ring-offset-2 focus:ring-2"style={{backgroundColor: '#240879', '&:hover': {backgroundColor: '#4D15F4'}}}
                                 onClick={handleAdd}
+                                onSubmit={handleCreateNewRow}
                             >
                                 Añadir
                             </button>
