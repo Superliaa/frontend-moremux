@@ -1,17 +1,13 @@
 import {useContext, useState} from "react"
 import image from "../assets/logo.svg";
-import { ErrorIncorrecto } from "../components/ErrorIncorrecto";
-import { ErrorServidor } from "../components/ErrorServidor";
 import {AppContext} from '../context/AppContext'
 import { useFetch } from "../Hooks/useFetch";
-
-
+import { Toaster, toast } from 'sonner';
 
 export const Login = () => {
 
     const [usuario, setUsuario] = useState([]);
-    const [modalOpen, setModalOpen] = useState(false);
-    const [modalIncorrecto, setModalIncorrecto] = useState(false);
+    const [incorrecto, setIncorrecto] = useState(false);
    
 
     const handleChange = (e) =>{
@@ -48,23 +44,19 @@ export const Login = () => {
                     rol: userEncontrado.Rol,}) ;
                
             }else if (!error){
-                setModalIncorrecto(true)
+                setIncorrecto(true);
 
-            }else{
-                setModalOpen(true)
             }
             console.log(usuarioConectado);
             console.log(usuarioConectado.fullname);
             console.log(usuarioConectado.rol);
-
-        
-}
+        }
 
 
-    return (
+     return (
         <main className="w-full h-screen flex flex-col items-center justify-center px-4">
-            {error && <ErrorServidor  setModalOpen={setModalOpen} modalOpen={modalOpen}/>}
-            {modalIncorrecto && <ErrorIncorrecto  setModalIncorrecto={setModalIncorrecto} modalIncorrecto={modalIncorrecto}/>}
+            {error && <Toaster richColors>{toast.error('Servidor no conectado')}</Toaster>}
+            {incorrecto && <Toaster richColors>{toast.error('Usuario o contraseña incorrecto')}</Toaster>}
 
             <div className="max-w-sm w-full text-gray-600">
                 <div className="text-center">
@@ -74,9 +66,7 @@ export const Login = () => {
                         <p className="">¿No tienes cuenta? <button className="font-medium text-blue-900 hover:text-blue-800">Regístrate</button></p>
                     </div>
                 </div>
-                <form
-                    className="mt-8 space-y-5"
-                >
+                <form className="mt-8 space-y-5">
                     <div>
                         <label className="font-medium ">
                             Nombre de Usuario

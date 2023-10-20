@@ -1,12 +1,13 @@
 import {useState, useMemo, useEffect} from 'react';
 import { useFetch } from "../Hooks/useFetch";
 import { DotLoader } from "react-spinners";
+import { Toaster, toast } from 'sonner';
 import {Tabla} from '../components/Tabla';
 import { CrearComponentes } from './CrearComponentes';
 
 export const Componentes = () => {
 
-  const {data,loading} = useFetch("http://localhost:1337/api/componentes")
+  const {data,loading,error} = useFetch("http://localhost:1337/api/componentes")
   const componentes = data.map((componente) => componente.attributes)
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -105,6 +106,7 @@ export const Componentes = () => {
        loading &&  <div className="flex justify-center items-center h-screen"> <DotLoader color="#240879" />  </div>
        )
   }
+   {error && <Toaster richColors>{toast.error('Servidor no conectado')}</Toaster>}
  </div>
 
  

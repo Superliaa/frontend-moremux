@@ -2,13 +2,14 @@ import {useMemo, useState, useEffect} from 'react'
 import { DotLoader } from "react-spinners";
 import {Tabla} from '../components/Tabla';
 import { useFetch } from '../Hooks/useFetch';
+import { Toaster, toast } from 'sonner';
 import { CrearCentros } from './crearCentros';
 
 
 export const GestinarCentros = () => {
 
 
-  const {data,loading} = useFetch("http://localhost:1337/api/centros");
+  const {data,loading,error} = useFetch("http://localhost:1337/api/centros");
   const centros = data.map((centro) => centro.attributes);
   
   const [modalOpen, setModalOpen] = useState(false);
@@ -110,7 +111,9 @@ const handleAdd =()=>{
       ) : (
          loading &&  <div className="flex justify-center items-center h-screen"> <DotLoader color="#240879" />  </div>
          )
+         
     }
+    {error && <Toaster richColors>{toast.error('Servidor no conectado')}</Toaster>}
    </div>
  
   )
