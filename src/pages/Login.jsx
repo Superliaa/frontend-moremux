@@ -55,8 +55,8 @@ export const Login = () => {
 
      return (
         <main className="w-full h-screen flex flex-col items-center justify-center px-4">
-            {error && <Toaster richColors>{toast.error('Servidor no conectado')}</Toaster>}
-            {incorrecto && <Toaster richColors>{toast.error('Usuario o contraseña incorrecto')}</Toaster>}
+            {error && <Toaster richColors position="top-right">{toast.error('Servidor no conectado')}</Toaster>}
+            {incorrecto && <Toaster richColors position="top-right">{toast.error('Usuario o contraseña incorrecto')}</Toaster>}
 
             <div className="max-w-sm w-full text-gray-600">
                 <div className="text-center">

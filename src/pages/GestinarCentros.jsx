@@ -1,4 +1,4 @@
-import {useMemo, useState, useEffect} from 'react'
+import {useMemo, useState, useEffect, useCallback} from 'react'
 import { DotLoader } from "react-spinners";
 import {Tabla} from '../components/Tabla';
 import { useFetch } from '../Hooks/useFetch';
@@ -15,6 +15,7 @@ export const GestinarCentros = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [nuevoElemento, setNuevoElemento] = useState([]);
   const [tableData, setTableData] = useState([]);
+  const [validationErrors, setValidationErrors] = useState({});
   const [columns, setColumns] = useState([
     {
       accessorKey: 'Nombre',
@@ -88,6 +89,62 @@ const handleAdd =()=>{
   });
 }
 
+const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
+  if (!Object.keys(validationErrors).length) {
+    tableData[row.index] = values;
+
+    try {
+      const response = await fetch('http://localhost:1337/api/centros', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (response.ok) {
+        // Actualiza la tabla de datos localmente o vuelve a buscar los datos actualizados para re-renderizar
+        setTableData([...tableData]);
+        exitEditingMode(); // Requerido para salir del modo de edición y cerrar el modal
+      } else {
+        // Maneja cualquier error de respuesta de la API aquí
+      }
+    } catch (error) {
+      // Maneja cualquier error de red u otros errores aquí
+    }
+  }
+};
+
+const handleCancelRowEdits = () => {
+  setValidationErrors({});
+};
+
+const handleDeleteRow = useCallback(
+  async (row) => {
+    if (
+      !confirm(`Esta seguro que desea eliminar ${row.getValue('Nombre')}`)
+    ) {
+      return;
+    }
+    try {
+      const response = await fetch('http://localhost:1337/api/centros', {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        // Elimina el elemento de la tabla de datos localmente
+        tableData.splice(row.index, 1);
+        setTableData([...tableData]);
+      } else {
+        // Maneja cualquier error de respuesta de la API aquí
+      }
+    } catch (error) {
+      // Maneja cualquier error de red u otros errores aquí
+    }
+  },
+  [tableData],
+);
+
  
 
   return (
@@ -103,7 +160,7 @@ const handleAdd =()=>{
         >
            Crear Nuevo Centro
         </button>
-        <Tabla columns={columns}  setTableData={setTableData} tableData={tableData}/> 
+        <Tabla columns={columns}  setTableData={setTableData} tableData={tableData} handleSaveRowEdits={handleSaveRowEdits} handleCancelRowEdits={handleCancelRowEdits} handleDeleteRow={handleDeleteRow}/> 
 
         {modalOpen && <CrearCentros setModalOpen={setModalOpen} modalOpen={modalOpen} handleAdd={handleAdd} handleChange={handleChange}/>}
 
@@ -113,7 +170,7 @@ const handleAdd =()=>{
          )
          
     }
-    {error && <Toaster richColors>{toast.error('Servidor no conectado')}</Toaster>}
+    {error && <Toaster richColors position="top-right">{toast.error('Servidor no conectado')}</Toaster>}
    </div>
  
   )

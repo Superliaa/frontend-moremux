@@ -1,7 +1,7 @@
 import { useEffect,useState } from "react";
 import { DotLoader } from "react-spinners";
 import { ErrorCarga } from "../components/ErrorCarga";
-import { Pagination } from "../components/Pagination";
+
 
 
 export const Menu = () => {
@@ -69,8 +69,8 @@ export const Menu = () => {
       
     </div>
    <div className=" flex justify-center items-center bottom-10">
-      <Pagination totalArticles={totalArticles} productsPerPage={productsPerPage} 
-      currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+      
+     
     </div>
     </>
   )

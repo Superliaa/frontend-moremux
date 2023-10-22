@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState, useEffect } from 'react';
+import React, {useState} from 'react';
 import { MaterialReactTable } from 'material-react-table';
 import {
   Box,
@@ -19,45 +19,8 @@ import { MRT_Localization_ES } from 'material-react-table/locales/es';
 
 
 
-export const Tabla = ({columns, setTableData, tableData}) => {
-  
-  const [validationErrors, setValidationErrors] = useState({});
-  
-
+export const Tabla = ({columns, setTableData, tableData, handleSaveRowEdits, handleCancelRowEdits, handleDeleteRow}) => {
  
-
-
-  const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
-    if (!Object.keys(validationErrors).length) {
-      tableData[row.index] = values;
-      //send/receive api updates here, then refetch or update local table data for re-render
-      setTableData([...tableData]);
-      exitEditingMode(); //required to exit editing mode and close modal
-    }
-  };
-  
-
-  const handleCancelRowEdits = () => {
-    setValidationErrors({});
-  };
-
-  const handleDeleteRow = useCallback(
-    (row) => {
-      if (
-        !confirm(`Esta seguro que desea eliminar ${row.getValue('Nombre')}`)
-      ) {
-        return;
-      }
-      //send api delete request here, then refetch or update local table data for re-render
-      tableData.splice(row.index, 1);
-      setTableData([...tableData]);
-    },
-    [tableData],
-  );
-
- 
-
-  
 
   return (
     <>

@@ -1,4 +1,4 @@
-import {useState, useMemo, useEffect} from 'react';
+import {useState, useMemo, useEffect, useCallback} from 'react';
 import { useFetch } from "../Hooks/useFetch";
 import { DotLoader } from "react-spinners";
 import { Toaster, toast } from 'sonner';
@@ -12,6 +12,7 @@ export const Componentes = () => {
 
   const [modalOpen, setModalOpen] = useState(false);
   const [nuevoElemento, setNuevoElemento] = useState([]);
+  const [validationErrors, setValidationErrors] = useState({});
   const [tableData, setTableData] = useState([]);
 
   useEffect(() => {
@@ -80,6 +81,62 @@ export const Componentes = () => {
     ],
    
   );
+
+  const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
+    if (!Object.keys(validationErrors).length) {
+      tableData[row.index] = values;
+  
+      try {
+        const response = await fetch('http://localhost:1337/api/componentes', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(values),
+        });
+  
+        if (response.ok) {
+          // Actualiza la tabla de datos localmente o vuelve a buscar los datos actualizados para re-renderizar
+          setTableData([...tableData]);
+          exitEditingMode(); // Requerido para salir del modo de edición y cerrar el modal
+        } else {
+          // Maneja cualquier error de respuesta de la API aquí
+        }
+      } catch (error) {
+        // Maneja cualquier error de red u otros errores aquí
+      }
+    }
+  };
+  
+  const handleCancelRowEdits = () => {
+    setValidationErrors({});
+  };
+  
+  const handleDeleteRow = useCallback(
+    async (row) => {
+      if (
+        !confirm(`Esta seguro que desea eliminar ${row.getValue('Descripcion')}`)
+      ) {
+        return;
+      }
+      try {
+        const response = await fetch('http://localhost:1337/api/componentes', {
+          method: 'DELETE',
+        });
+  
+        if (response.ok) {
+          // Elimina el elemento de la tabla de datos localmente
+          tableData.splice(row.index, 1);
+          setTableData([...tableData]);
+        } else {
+          // Maneja cualquier error de respuesta de la API aquí
+        }
+      } catch (error) {
+        // Maneja cualquier error de red u otros errores aquí
+      }
+    },
+    [tableData],
+  );
   
  
   
@@ -97,7 +154,7 @@ export const Componentes = () => {
       >
          Crear Nuevo Componente
       </button>
-      <Tabla columns={columns}  setTableData={setTableData} tableData={tableData}/> 
+      <Tabla columns={columns}  setTableData={setTableData} tableData={tableData} handleSaveRowEdits={handleSaveRowEdits} handleDeleteRow={handleDeleteRow} handleCancelRowEdits={handleCancelRowEdits}/> 
 
       {modalOpen && <CrearComponentes setModalOpen={setModalOpen} modalOpen={modalOpen} handleAdd={handleAdd} handleChange={handleChange}/>}
 
@@ -106,7 +163,7 @@ export const Componentes = () => {
        loading &&  <div className="flex justify-center items-center h-screen"> <DotLoader color="#240879" />  </div>
        )
   }
-   {error && <Toaster richColors>{toast.error('Servidor no conectado')}</Toaster>}
+   {error && <Toaster richColors position="top-right">{toast.error('Servidor no conectado')}</Toaster>}
  </div>
 
  
