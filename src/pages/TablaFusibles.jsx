@@ -1,4 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react';
+import {Link} from 'react-router-dom'
 import { MaterialReactTable } from 'material-react-table';
 import {
   Box,
@@ -17,7 +18,7 @@ import { Delete, Edit } from '@mui/icons-material';
 import { MRT_Localization_ES } from 'material-react-table/locales/es';
 
 
-export const Trazas = () => {
+export const TablaFusibles = () => {
   const [createModalOpen, setCreateModalOpen] = useState(false);
   const [tableData, setTableData] = useState([]);
   const [validationErrors, setValidationErrors] = useState({});
@@ -35,7 +36,7 @@ export const Trazas = () => {
       exitEditingMode(); //required to exit editing mode and close modal
     }
   };
-
+ 
   const handleCancelRowEdits = () => {
     setValidationErrors({});
   };
@@ -89,46 +90,45 @@ export const Trazas = () => {
     () => [
      
       {
-        accessorKey: 'usuario',
-        header: 'Usuario',
+        accessorKey: 'tipo',
+        header: 'Tipo',
         size: 140,
         muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
           ...getCommonEditTextFieldProps(cell),
         }),
       },
+     
       {
-        accessorKey: 'fecha',
-        header: 'Fecha',
-        size: 140,
+        accessorKey: 'tension',
+        header: ' Tensión Nominal ',
+        size: 80,
+        type: 'number',
         muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
           ...getCommonEditTextFieldProps(cell),
         }),
       },
       {
-        accessorKey: 'accion',
-        header: 'Acción',
-        size: 140,
+        accessorKey: 'corriente',
+        header: 'Corriente Nominal ',
+        size: 80,
+        type: 'number',
         muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
           ...getCommonEditTextFieldProps(cell),
         }),
       },
       {
-        accessorKey: 'elemento',
-        header: 'Elemento',
-        size: 140,
-        muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
-          ...getCommonEditTextFieldProps(cell),
-        }),
-      },
-      {
-        accessorKey: 'direecioIP',
-        header: 'Dirección IP',
-        size: 140,
+        accessorKey: 'longitud',
+        header: 'Longitud ',
+        size: 80,
+        type: 'number',
         muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
           ...getCommonEditTextFieldProps(cell),
         }),
       },
       
+     
+     
+     
     ],
     [getCommonEditTextFieldProps],
   );
@@ -139,13 +139,21 @@ export const Trazas = () => {
       <div className="items-start justify-between md:flex">
                 <div className="max-w-lg">
                     <h3 className="text-gray-800 text-xl font-bold sm:text-2xl">
-                       Trazas
+                       Fusibles 
                     </h3>
                     <p className="text-gray-600 mt-2 mb-3">
-                        Listado de Trazas
+                        Listado de Fusibles 
                     </p>
                 </div>
-               
+                <div className="mt-3 md:mt-0">
+                    <Link
+                        to="/"
+                        className="inline-block px-4 py-2 text-white duration-150 font-medium rounded-lg   md:text-sm"
+                        style={{ backgroundColor: '#240879', '&:hover': { backgroundColor: '#4D15F4' } }}
+                    >
+                        Añadir Fusibles
+                    </Link>
+                </div>
             </div>
       <MaterialReactTable
         displayColumnDefOptions={{
@@ -185,9 +193,5 @@ export const Trazas = () => {
     </>
   );
 };
-
-
-
-
 
 
