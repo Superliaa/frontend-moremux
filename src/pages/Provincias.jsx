@@ -116,7 +116,7 @@ export const Provincias = () => {
                         Listado de Provincias
                     </p>
                 </div>
-                <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+                <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none flex justify-end float-rigth pb-4">
                     <Link
                         to="/"
                         className="inline-flex items-center justify-center px-4 py-2 text-white duration-150 font-medium rounded-lg   md:text-sm"
