@@ -104,8 +104,8 @@ export const Gerencias = () => {
   return (
     <>
     <div className="max-w-screen-xl mx-auto px-4 md:px-8">
-      <div className="items-start justify-between md:flex">
-                <div className="max-w-lg">
+      <div className="sm:flex sm:items-center">
+                <div className="sm:flex-auto">
                     <h3 className="text-gray-800 text-xl font-bold sm:text-2xl">
                         Gerencias
                     </h3>
@@ -113,10 +113,10 @@ export const Gerencias = () => {
                         Listado de Gerencias
                     </p>
                 </div>
-                <div className="mt-3 md:mt-0">
+                <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
                     <Link
                         to="/"
-                        className="inline-block px-4 py-2 text-white duration-150 font-medium rounded-lg   md:text-sm"
+                        className="inline-flex items-center justify-center px-4 py-2 text-white duration-150 font-medium rounded-lg   md:text-sm"
                         style={{ backgroundColor: '#240879', '&:hover': { backgroundColor: '#4D15F4' } }}
                     >
                         Añadir Gerencias
